@@ -6,11 +6,12 @@ from twisted.internet import task, reactor
 
 # How often the test runs in seconds
 interval = 300.0
-
-# Opens the webpage in FireFox, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
+#/Users/Jacob/Documents/chromedriver.exe
+path = input('Enter the path for chromedriver in /path/to/file.exe format: ')
+# Opens the webpage in Chrome, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
 def webex_test():
-    # Open FireFox and browse to the WebEx Network Test site ('mediatest.ciscospark.com')
-    driver = webdriver.Firefox()
+    # Open Chrome and browse to the WebEx Network Test site ('mediatest.ciscospark.com')
+    driver = webdriver.Chrome(executable_path=path)
     driver.get("https://mediatest.ciscospark.com")
     #Locate the 'Start Test' button and click it. This assumes the user is using the default '
     elem = driver.find_element_by_id('start_tests')
@@ -43,8 +44,6 @@ def webex_test():
     driver.quit()
     return 'The test has completed'
 
-
-#Run the tests using specified interval
 schedule = task.LoopingCall(webex_test)
 schedule.start(interval)
 reactor.run()
