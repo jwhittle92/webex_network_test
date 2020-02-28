@@ -12,10 +12,12 @@ elem.click()
 
 time.sleep(45)
 
-app = driver.find_element_by_class_name('card-result-text.card-result-text-app-ok')
-room = driver.find_element_by_class_name('card-result-text.card-result-text-room-ok')
-call = driver.find_element_by_class_name('card-result-text.card-result-text-call-ok')
+app = driver.find_element_by_class_name('card-result-text.card-result-text-app-ok').text
+room = driver.find_element_by_class_name('card-result-text.card-result-text-room-ok').text
+call = driver.find_element_by_class_name('card-result-text.card-result-text-call-ok').text
 
+lis = [app, room, call]
+print(lis)
 
 if app == 'Successful' and room == 'Successful' and call == 'Successful':
     print('The tests were successful')
@@ -31,7 +33,7 @@ else:
     log.write(output)
     log.close()
 
-driver.quit()
+#driver.quit()
  
 
 
