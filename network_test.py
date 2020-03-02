@@ -3,12 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 from selenium import webdriver
 from tkinter import Tk
-from twisted.internet import task, reactor
 
-# How often the test runs in seconds
-interval = 300.0
-#/Users/Jacob/Documents/chromedriver.exe
-#path = input('Enter the path for chromedriver in /path/to/file.exe format: ')
 # Opens the webpage in Chrome, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
 def webex_test():
     # Open Chrome and browse to the WebEx Network Test site ('mediatest.ciscospark.com')
@@ -21,7 +16,7 @@ def webex_test():
     # Wait some time for the network tests to complete
     time.sleep(45)
 
-    # Locate the results after the tests have completed 
+    # Locate the results after the tests have completed
     app = driver.find_element_by_class_name('card-result-text.card-result-text-app-ok').text
     room = driver.find_element_by_class_name('card-result-text.card-result-text-room-ok').text
     call = driver.find_element_by_class_name('card-result-text.card-result-text-call-ok').text
@@ -31,20 +26,18 @@ def webex_test():
         print('The tests were successful')
     else:
         print('The tests were not successful')
-        date = datetime.now()
+        date = datetime.time(datetime.now())
         # use the 'copy clipboard' function and save output to file
         copypaste = driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/article/div[5]/div/a[2]')
         copypaste.click()
         #store clipboard in variable
         output = Tk().clipboard_get()
         #write variable to file
-        log = open('webexlogs-' + str(date) +'txt', 'w+')
+        log = open('webexlogs-' + date.strftime('%m-%d-%H;%M;%S') + '.txt', 'w+')
         log.write(output)
         log.close()
 
     driver.quit()
     return 'The test has completed'
 
-schedule = task.LoopingCall(webex_test)
-schedule.start(interval)
-reactor.run()
+webex_test()
