@@ -1,4 +1,5 @@
 import time
+from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 from selenium import webdriver
 from tkinter import Tk
@@ -7,11 +8,11 @@ from twisted.internet import task, reactor
 # How often the test runs in seconds
 interval = 300.0
 #/Users/Jacob/Documents/chromedriver.exe
-path = input('Enter the path for chromedriver in /path/to/file.exe format: ')
+#path = input('Enter the path for chromedriver in /path/to/file.exe format: ')
 # Opens the webpage in Chrome, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
 def webex_test():
     # Open Chrome and browse to the WebEx Network Test site ('mediatest.ciscospark.com')
-    driver = webdriver.Chrome(executable_path=path)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get("https://mediatest.ciscospark.com")
     #Locate the 'Start Test' button and click it. This assumes the user is using the default '
     elem = driver.find_element_by_id('start_tests')
