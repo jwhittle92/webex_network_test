@@ -1,8 +1,10 @@
-import time
+import time, smtplib, ssl
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 from selenium import webdriver
 from tkinter import Tk
+
+
 
 # Opens the webpage in Chrome, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
 def webex_test():
@@ -37,7 +39,10 @@ def webex_test():
         log.write(output)
         log.close()
 
+
     driver.quit()
     return 'The test has completed'
 
-webex_test()
+if __name__ == "__main__":
+    webex_test()
+
