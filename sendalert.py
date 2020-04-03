@@ -11,15 +11,15 @@ class SendAlert():
         msg = EmailMessage()
         msg.set_content(self.body)
         msg['Subject'] = f'WebEx Network Test - Failed'
-        msg['From'] = sender
-        msg['To'] = receiver
+        msg['From'] = SENDING_EMAIL
+        msg['To'] = RECEIVING_EMAIL
         try:
-            s = smtplib.SMTP(mailserver, port)
+            s = smtplib.SMTP(MAILSERVER, PORT)
             s.login(mailuser, mailpassword)
             s.send_message(msg)
             s.quit()
         except:
             context = ssl.create_default_context()
-            s = smtplib.SMTP_SSL(mailserver, port, context=context)
-            s.login(mailuser, mailpassword)
+            s = smtplib.SMTP_SSL(MAILSERVER, PORT, context=context)
+            s.login(MAILSERVER_USERNAME, MAILSERVER_PASSWORD)
             s.send_message(msg)
