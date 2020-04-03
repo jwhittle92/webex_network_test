@@ -10,7 +10,7 @@ class SendAlert():
     def send_alert(self):
         msg = EmailMessage()
         msg.set_content(self.body)
-        msg['Subject'] = f'WebEx Network Test - Failed'
+        msg['Subject'] = f'WebEx Network Test Results'
         msg['From'] = SENDING_EMAIL
         msg['To'] = RECEIVING_EMAIL
         try:
