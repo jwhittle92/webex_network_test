@@ -1,10 +1,9 @@
-import time, smtplib, ssl
+import time 
+from sendalert import SendAlert
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 from selenium import webdriver
 from tkinter import Tk
-
-
 
 # Opens the webpage in Chrome, finds the 'Start Test' button, and clicks it. This assumes the user has a wired connection.
 def webex_test():
@@ -26,6 +25,8 @@ def webex_test():
     # Evaluate the results of the network test
     if app == 'Successful' and room == 'Successful' and call == 'Successful':
         print('The tests were successful')
+        alert = SendAlert('The tests were successful')
+        alert.send_alert()
     else:
         print('The tests were not successful')
         date = datetime.time(datetime.now())
@@ -38,8 +39,8 @@ def webex_test():
         log = open('webexlogs-' + date.strftime('%m-%d-%H;%M;%S') + '.txt', 'w+')
         log.write(output)
         log.close()
-
-
+        alert = SendAlert(output)
+        alert.send_alert()
     driver.quit()
     return 'The test has completed'
 
