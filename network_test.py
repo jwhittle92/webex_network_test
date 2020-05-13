@@ -25,8 +25,6 @@ def webex_test():
     # Evaluate the results of the network test
     if app == 'Successful' and room == 'Successful' and call == 'Successful':
         print('The tests were successful')
-        alert = SendAlert('The tests were successful')
-        alert.send_alert()
     else:
         print('The tests were not successful')
         date = datetime.time(datetime.now())
