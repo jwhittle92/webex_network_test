@@ -15,7 +15,7 @@ class SendAlert():
         msg['To'] = RECEIVING_EMAIL
         try:
             s = smtplib.SMTP(MAILSERVER, PORT)
-            s.login(mailuser, mailpassword)
+            s.login(MAILSERVER_USERNAME, MAILSERVER_PASSWORD)
             s.send_message(msg)
             s.quit()
         except:
