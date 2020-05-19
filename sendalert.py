@@ -14,12 +14,11 @@ class SendAlert():
         msg['From'] = SENDING_EMAIL
         msg['To'] = RECEIVING_EMAIL
         try:
-            s = smtplib.SMTP(MAILSERVER, PORT)
-            s.login(MAILSERVER_USERNAME, MAILSERVER_PASSWORD)
-            s.send_message(msg)
-            s.quit()
-        except:
             context = ssl.create_default_context()
             s = smtplib.SMTP_SSL(MAILSERVER, PORT, context=context)
+            s.login(MAILSERVER_USERNAME, MAILSERVER_PASSWORD)
+            s.send_message(msg)
+        except:
+            s = smtplib.SMTP(MAILSERVER, PORT)
             s.login(MAILSERVER_USERNAME, MAILSERVER_PASSWORD)
             s.send_message(msg)
